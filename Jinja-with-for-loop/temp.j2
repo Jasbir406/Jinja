@@ -1,4 +1,4 @@
-{%- for p in PL_AS_65003_IN %} 
+{%- for p in prefixes %} 
 set policy-options prefix-list ORIGINATED {{ p -}} {% endfor %}
 
 

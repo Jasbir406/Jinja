@@ -1,0 +1,5 @@
+{%- for p in PL_AS_65003_IN %} 
+set policy-options prefix-list ORIGINATED {{ p -}} {% endfor %}
+
+
+

@@ -1,0 +1,51 @@
+Let's now see how we can loop over dictionaries. We will again use for loop construct, remember, that's all we've got!
+
+We can use the same syntax we used for iterating over elements of the list but here we'll iterate over dictionary keys. To retrieve value assigned to the key we need to use subscript, i.e. [], notation.
+
+One advantage of using dictionaries over lists is that we can use names of elements as a reference, this makes retrieving objects and their values much easier.
+
+Say we used list to represent our collection of interfaces:
+
+interfaces:
+  - Ethernet1:
+      description: leaf01-eth51
+      ipv4_address: 10.50.0.0/31
+  - Ethernet2:
+      description: leaf02-eth51
+      ipv4_address: 10.50.0.2/31
+
+There is no easy way of retrieving just Ethernet2 entry. We would either have to iterate over all elements and do key name comparison or we'd have to resort to advanced filters.
+
+One thing to note, and this is hopefully becoming apparent, is that we need to spend some time modeling our data so that it's easy to work with. This is something you will rarely get right on your first attempt so don't be afraid to experiment and iterate.
+
+Following with our example, we can keep data on individual interfaces assigned to keys in interfaces dictionary, instead of having them in a list:
+
+interfaces:
+  Ethernet1:
+    description: leaf01-eth51
+    ipv4_address: 10.50.0.0/31
+  Ethernet2:
+    description: leaf02-eth51
+    ipv4_address: 10.50.0.2/31
+
+Now we can access this data in our template like so:
+
+{% for intf in interfaces -%}
+interface {{ intf }}
+ description {{ interfaces[intf].description }}
+ ip address {{ interfaces[intf].ipv4_address }}
+{% endfor %}
+
+
+Giving us end result:
+
+interface Ethernet1
+ description leaf01-eth51
+ ip address 10.50.0.0/31
+interface Ethernet2
+ description leaf02-eth51
+ ip address 10.50.0.2/31
+
+Here intf refers to Ethernet1 and Ethernet2 keys. To access attributes of each interface we need to use interfaces[intf] notation.
+
+

@@ -1,0 +1,7 @@
+interfaces:
+	et-0/0/0:
+		description: Transit-TELIA
+		ipv4_address: 1.1.1.1/31
+	et-0/0/1:
+		description: NAP
+		ipv4_address: 2.2.2.2/31

@@ -1,1 +1,5 @@
-This becomes especially important if you want to recursively iterate over deeply nested dictionaries..
+The end result is the same in chapter 8 as chapter 7 but by using items() method we simplify access to the attributes. This becomes especially important if you want to recursively iterate over deeply nested dictionaries.
+
+Key or k in my template logic is the key and value or v is the value of that key.
+
+This becomes especially important if you want to recursively iterate over deeply nested dictionaries.

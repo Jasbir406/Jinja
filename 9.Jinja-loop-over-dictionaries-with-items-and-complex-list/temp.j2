@@ -1,3 +1,5 @@
-{% for k,v in prefix_lists.items() %}
-set policy-options prefix-list {{ k }} {{ v.first_pl}}
-{% endfor %}
+{% for k,v in prefix_lists.items() -%}
+{% for value in v -%}
+set policy-options prefix-list {{ k }} {{ value }}
+{% endfor -%} 
+{% endfor -%}

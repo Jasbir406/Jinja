@@ -1,0 +1,4 @@
+this has been the most complex for loop for me so far. its a for loop inside for loop to access all key values pair. since we want the statement "set policy-options prefix-list" to catch prefix list name and then curate each prefix we have to write 2 for loops.
+1st for loop accesses prefix lists list itself in key attribute and prefix-list name, like first_pl and second_pl in v attribute.
+
+the 2nd for loop access the key value pair inside v variable from 1st loop and then it access each prefix which is then added to the output statement.

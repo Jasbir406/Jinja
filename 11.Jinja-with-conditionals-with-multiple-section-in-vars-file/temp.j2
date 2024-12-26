@@ -1,0 +1,9 @@
+set system {{ hostname }}
+{% for k, v in interfaces.items() -%}
+set interfaces {{ k }} unit 0 family inet address {{ v.ip }}/{{ v.mask }}
+set interfaces {{ k }} unit 0 description {{ v.description }}
+{% endfor -%}
+{% if routing_protocol == 'ospf' -%}
+set routing-options ospf-process {{ ospf.pid }}
+set routing-options router-id {{ ospf.router_id }}
+{% endif -%}

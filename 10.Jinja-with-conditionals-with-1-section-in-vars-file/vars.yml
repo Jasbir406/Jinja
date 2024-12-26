@@ -1,0 +1,21 @@
+---
+ hostname: router-w-bgp
+ routing_protocol: bgp
+ interfaces:
+  loopback0:
+   ip: 1.1.1.1
+   mask: 32
+   description: lo0
+  et-0/0/0:
+   ip: 2.2.2.2
+   mask: 24
+   description: Transit-TELIA
+  et-0/0/1:
+   ip: 3.3.3.3
+   mask: 24
+   description: NAP-AMSIX 
+ bgp:
+  as: 20940
+  router_id: 1.1.1.1
+ 
+

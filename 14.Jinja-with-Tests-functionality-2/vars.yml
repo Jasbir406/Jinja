@@ -1,0 +1,4 @@
+---
+ hostname: r01.border01.lon04.fab
+ ip_address: 192.168.0.1
+ mask: 255.255.255.0

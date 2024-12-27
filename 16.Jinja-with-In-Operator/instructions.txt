@@ -3,3 +3,8 @@ in operator which is placed between two values can be used to check if value on 
 The obvious use cases for in operator is to check if something we're interested in just exists in a collection, we don't necessarily need to retrieve the item.
 
 Looking at the example, we could check if Loopback0 is in the list interfaces, and if it does, we will use it to source Management Plane packets, if not we'll use Management1 interface.
+
+
+Notice that even though interfaces is a dictionary containing a lot of data we didn't iterate over it or retrieve any of the keys. All we wanted to know was the presence of Loopback0 key.
+
+To be completely honest, the above template could use some tweaking, we essentially duplicated 3 lines of config and hardcoded interface names. That's not a very good practice, and I'll show you in the next post how we can make improvements here.

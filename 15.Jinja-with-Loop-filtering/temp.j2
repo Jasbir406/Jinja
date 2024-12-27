@@ -1,0 +1,5 @@
+{% for k,v in interfaces.items() if v.ip_address is defined %}
+set interfaces {{ k }} unit 0 family inet address {{ v.ip_address }}
+set interfaces {{ k }} unit 0 description {{ v.description }}
+{% endfor %}
+

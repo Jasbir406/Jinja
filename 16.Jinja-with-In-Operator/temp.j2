@@ -1,0 +1,5 @@
+{% if 'loopback0' in interfaces -%}
+set interfaces loopback0 unit 0 family inet filter import-slow
+{% else -%}
+set interfaces mgmmt unit 0 family inet filter import-sflow
+{%- endif %}

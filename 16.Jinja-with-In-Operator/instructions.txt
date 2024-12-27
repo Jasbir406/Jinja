@@ -1,0 +1,5 @@
+in operator which is placed between two values can be used to check if value on the left is contained in the value on the right one. You can use it to test if an element appears in the list or if a key exists in a dictionary.
+
+The obvious use cases for in operator is to check if something we're interested in just exists in a collection, we don't necessarily need to retrieve the item.
+
+Looking at the example, we could check if Loopback0 is in the list interfaces, and if it does, we will use it to source Management Plane packets, if not we'll use Management1 interface.

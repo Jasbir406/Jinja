@@ -1,0 +1,4 @@
+{% for r in routers|batch(1) %}
+set system hostname {{ r|join(',') }}
+{% endfor %}
+

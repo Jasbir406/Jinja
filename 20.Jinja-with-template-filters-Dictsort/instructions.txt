@@ -1,0 +1,4 @@
+dictsort
+dictsort(value, case_sensitive=False, by='key', reverse=False) - Allows us to sort dictionaries as they are not sorted by default in Python. Sorting is done by key by default but you can request sorting by value using attribute by='value'.
+
+In our example we sort prefix-lists by their name (dict key):

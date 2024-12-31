@@ -1,0 +1,3 @@
+{% for p in prefix_lists  -%}
+set policy-options prefix-list {{ p.name }} permit {{ p.prefix }} 
+{% endfor -%}

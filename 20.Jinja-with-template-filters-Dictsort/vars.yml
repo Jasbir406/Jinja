@@ -1,0 +1,8 @@
+---
+ prefix_lists:
+  - name: ntt_out
+    prefix: 10.1.1.1/24
+  - name: cogent_out 
+    prefix: 20.1.1.1/24
+  - name: telia_out
+    prefix: 30.1.1.1/24

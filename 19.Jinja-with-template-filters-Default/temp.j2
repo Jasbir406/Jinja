@@ -1,0 +1,3 @@
+{% for i in interfaces -%}
+set interfaces {{ i.name }} switchport mode access vlan {{ i.vlan | default('10') }}
+{% endfor -%}

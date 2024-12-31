@@ -1,0 +1,7 @@
+interfaces:
+ - name: et-0/0/0
+   vlan: 20
+ - name: et-0/0/1
+   vlan: 30
+ - name: et-0/0/2
+ - name: et-0/0/3

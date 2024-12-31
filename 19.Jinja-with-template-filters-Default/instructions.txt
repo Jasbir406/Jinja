@@ -1,0 +1,10 @@
+Useful for guarding against undefined variables.Returns default value if passed variable is not specified.
+
+default(value, default_value='', boolean=False)
+
+
+Can also be used for optional attribute that we want to set to sane value as a default.
+
+In our example we place interfaces in their configured vlans, or if no vlan is specified we assign them to vlan 10 by default.
+
+

@@ -1,0 +1,2 @@
+center
+center(value, width=80)- Centers value in a field of given width by adding space padding. Handy when adding formatting to reporting.

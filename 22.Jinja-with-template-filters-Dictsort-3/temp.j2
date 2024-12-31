@@ -1,0 +1,3 @@
+{% for peer, priority in peer_priority | dictsort(by='value', reverse=true) -%}
+set protocols bgp group GROUP1 neighbor {{ peer }} local-pref {{ priority }}
+{% endfor %}

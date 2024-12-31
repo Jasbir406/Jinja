@@ -1,0 +1,32 @@
+this code works only with dictsort filter.
+if you code the template without that filter, it wont work.
+for e.g. first i wrote this and it didnt work.
+
+{% for peer, priority in peer_priority -%}
+set protocols bgp group GROUP1 neighbor {{ peer }} local-pref {{ priority }}
+{% endfor %}
+
+then i wrote this and it worked.
+
+{% for peer, priority in peer_priority | dictsort -%}
+set protocols bgp group GROUP1 neighbor {{ peer }} local-pref {{ priority }}
+{% endfor %}
+
+And gave this output.
+~/Doc/Jinja/22.Jinja-with-template-filters-Dictsort-3 main *1 ?1 ❯ python3 render.py
+set protocols bgp group GROUP1 neighbor ntt local-pref 200
+set protocols bgp group GROUP1 neighbor telia local-pref 300
+set protocols bgp group GROUP1 neighbor zayo local-pref 100
+
+why?
+
+dictsort
+dictsort(value, case_sensitive=False, by='key', reverse=False) - Allows us to sort dictionaries as they are not sorted by default in Python. Sorting is done by key by default but you can request sorting by value using attribute by='value'.
+
+
+Then I modified distort filter using value and reverse = true then it gave me this.
+
+~/Doc/Jinja/22.Jinja-with-template-filters-Dictsort-3 main *1 ?1 ❯ python3 render.py
+set protocols bgp group GROUP1 neighbor telia local-pref 300
+set protocols bgp group GROUP1 neighbor ntt local-pref 200
+set protocols bgp group GROUP1 neighbor zayo local-pref 100

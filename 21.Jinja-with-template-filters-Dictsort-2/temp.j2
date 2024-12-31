@@ -1,0 +1,3 @@
+{% for pl_name, pl_lines in prefix_lists | dictsort -%}
+set policy-options prefix-lists {{ pl_name }} {{ pl_lines | join('\n') }}
+{% endfor -%}

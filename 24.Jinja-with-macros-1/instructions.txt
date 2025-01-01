@@ -112,3 +112,15 @@ unused-port-dedicated-to-{{ if_role }}-devices
 set interfaces {{ i.name }} description {{ define_intf_desc(i.role) }}
 {% endfor -%}
 
+
+It might not be immediately apparent if macro is useful here since we only have one line in the body. We could've just written this line inside of the for loop. Downside of that is that our intent is not clearly conveyed.
+
+{% for intf in interfaces -%}
+interface {{ intf.name }}
+  description Unused port, dedicated to {{ intf.role }} devices
+{% endfor -%}
+This works but it's not immediately obvious that this is description we want to be used as a default. Things will get even worse if we start adding more processing here.
+
+If we use macro however, the name of the macro tells us clearly that a default interface description will be applied. That is, it is clear what our intent was here.
+
+And there's the real kicker. Macros can be moved to separate files and included in templates that need them. Which means you only need to maintain this one macro that then can be used by hundreds of templates! And number of places you have to update your default description? One, just one.

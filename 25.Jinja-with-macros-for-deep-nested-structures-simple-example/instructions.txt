@@ -1,0 +1,53 @@
+Here I am using this route info as data in vars.json file. To loop through all the details I am using for loop and key and value two attributes and items() method to go through the nested structure.
+
+{
+    "vrfs": {
+        "default": {
+        "routerId": "10.3.0.2",
+        "vrf": "default",
+        "bgpRouteEntries": {
+            "10.1.0.1/32": {
+            "bgpAdvertisedPeerGroups": {},
+            "maskLength": 32,
+            "bgpRoutePaths": [
+                {
+                "asPathEntry": {
+                    "asPathType": null,
+                    "asPath": "i"
+                },
+                "med": 0,
+                "localPreference": 100,
+                "weight": 0,
+                "reasonNotBestpath": null,
+                "nextHop": "10.2.0.0",
+                "routeType": {
+                    "atomicAggregator": false,
+                    "suppressed": false,
+                    "queued": false,
+                    "valid": true,
+                    "ecmpContributor": false,
+                    "luRoute": false,
+                    "active": true,
+                    "stale": false,
+                    "ecmp": false,
+                    "backup": false,
+                    "ecmpHead": false,
+                    "ucmp": false
+                }
+                }
+            ],
+            "address": "10.1.0.1"
+            }
+        }
+    }
+}
+} 
+
+Template.j2 has this code to format the output.
+
+{% for route, routenfo in vrfs.default.bgpRouteEntries.items() -%}
+Route: {{ route }} - Next Hop: {{ routenfo.bgpRoutePaths.0.nextHop }} - Permitted: {{ routenfo.bgpRoutePaths.0.routeType.valid }} - LP: {{ routenfo.bgpRoutePaths.0.localPreference }}
+{% endfor %}
+
+In next example, we will convert this same template code to a macro.
+

@@ -1,0 +1,3 @@
+{% for route, routenfo in vrfs.default.bgpRouteEntries.items() -%}
+Route: {{ route }} - Next Hop: {{ routenfo.bgpRoutePaths.0.nextHop }} - Permitted: {{ routenfo.bgpRoutePaths.0.routeType.valid }} - LP: {{ routenfo.bgpRoutePaths.0.localPreference }}
+{% endfor %}

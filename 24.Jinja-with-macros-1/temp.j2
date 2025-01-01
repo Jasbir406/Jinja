@@ -1,0 +1,7 @@
+{% macro define_intf_desc(if_role) -%}
+unused-port-dedicated-to-{{ if_role }}-devices
+{% endmacro -%}
+
+{% for i in interfaces -%}
+set interfaces {{ i.name }} description {{ define_intf_desc(i.role) }}
+{% endfor -%}

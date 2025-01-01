@@ -1,0 +1,114 @@
+Macros are similar to functions in many programming languages. We use them to encapsulate logic used to perform repeatable actions. Macros can take arguments or be used without them.
+
+Inside of macros we can use any of the Jinja features and constructs. Result of running macro is some text. You can essentially treat macro as one big evaluation statement that also allows parametrization.
+
+Macros are great for creating reusable components when we find ourselves copy pasting around same lines of text and code. You might benefit from macro even when all it does is rendering static text.
+
+Take for example device banners, these tend to be static but are used over and over again. Instead of copy pasting text of the banner across your templates you can create macro and have it render the banner.
+
+Not only will you reduce mistakes that can happen during copying but you also make future updates to the banner much easier. Now you have only one place where the banner needs to be changed and anything else using this macro will reflect the changes automatically.
+
+
+{% macro banner() -%}
+banner motd ^
+===========================================
+|   This device is property of BigCorpCo  |
+|   Unauthorized access is unauthorized   |
+|  Unless you're authorized to access it  |
+|  In which case play nice and stay safe  |
+===========================================
+^
+{% endmacro -%}
+
+{{ banner() }}
+banner motd ^
+===========================================
+|   This device is property of BigCorpCo  |
+|   Unauthorized access is unauthorized   |
+|  Unless you're authorized to access it  |
+|  In which case play nice and stay safe  |
+===========================================
+^
+So that's our first macro right there!
+
+As you can see above we start macro with {% macro macro_name(arg1, arg2) %} and we end it with {% endmacro %}. Arguments are optional.
+
+Anything you put in between opening and closing tags will be processed and rendered at a location where you called the macro.
+
+Once we defined macro we can use it anywhere in our template. We can directly insert results by using {{ macro_name() }} substitution syntax. We can also use it inside other constructs like if..else blocks or for loops. You can even pass macros to other macros!
+
+
+Basically, in this example we use this
+#########################################
+
+Macro is this. Anything you put in between opening and closing tags will be processed and rendered at a location where you called the macro.
+So, this will be called. unused port, dedicated to {{ if_role }} devices
+
+{% macro define_intf_desc(if_role) -%}
+unused port, dedicated to {{ if_role }} devices
+{% endmacro -%}
+
+{{ if_role }} is arguement. It needs a value. Its value is coming from the for loop written inside the temp.j2 file.
+While looping over the data with keyword "I", it will fetch i.role from data vars.yml file and enter its value to the macro argument.
+
+
+
+
+
+~/Doc/Jinja/24.Jinja-with-macros-1 main *1 ?1 ❯ python3 render.py            21s 10:35:44 AM
+set interfaces et-0/0/0 description unused port, dedicated to Desktop devices
+
+set interfaces et-0/0/1 description unused port, dedicated to Desktop devices
+
+set interfaces et-0/0/2 description unused port, dedicated to printer devices
+
+set interfaces et-0/0/3 description unused port, dedicated to voice devices
+
+
+~/Doc/Jinja/24.Jinja-with-macros-1 main *1 ?1 ❯ cat temp.j2                      10:35:45 AM
+{% macro define_intf_desc(if_role) -%}
+unused port, dedicated to {{ if_role }} devices
+{% endmacro -%}
+
+{% for i in interfaces -%}
+set interfaces {{ i.name }} description {{ define_intf_desc(i.role) }}
+{% endfor -%}
+
+
+Without calling the macro, this is the output.
+~/Doc/Jinja/24.Jinja-with-macros-1 main *1 ?1 ❯ python3 render.py                10:39:18 AM
+set interfaces et-0/0/0 description Desktop
+set interfaces et-0/0/1 description Desktop
+set interfaces et-0/0/2 description printer
+set interfaces et-0/0/3 description voice
+
+With this temp file.
+{% macro define_intf_desc(if_role) -%}
+unused port, dedicated to {{ if_role }} devices
+{% endmacro -%}
+
+{% for i in interfaces -%}
+set interfaces {{ i.name }} description {{ (i.role) }}
+{% endfor -%}
+
+
+Calling macro will look like this
+~/Doc/Jinja/24.Jinja-with-macros-1 main *1 ?1 ❯ python3 render.py                10:40:37 AM
+set interfaces et-0/0/0 description unused-port-dedicated-to-Desktop-devices
+
+set interfaces et-0/0/1 description unused-port-dedicated-to-Desktop-devices
+
+set interfaces et-0/0/2 description unused-port-dedicated-to-printer-devices
+
+set interfaces et-0/0/3 description unused-port-dedicated-to-voice-devices
+
+
+See the temp file now
+{% macro define_intf_desc(if_role) -%}
+unused-port-dedicated-to-{{ if_role }}-devices
+{% endmacro -%}
+
+{% for i in interfaces -%}
+set interfaces {{ i.name }} description {{ define_intf_desc(i.role) }}
+{% endfor -%}
+

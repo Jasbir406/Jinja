@@ -1,0 +1,11 @@
+interfaces:
+ - name: et-0/0/0
+   role: Desktop
+ - name: et-0/0/1
+   role: Desktop
+ - name: et-0/0/2
+   role: printer
+ - name: et-0/0/3
+   role: voice
+
+

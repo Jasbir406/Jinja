@@ -1,0 +1,3 @@
+groupby(value, attribute) - Used to group objects based on one of the attributes. You can choose to group by nested attribute using dot notation. This filter can be used for reporting based on feature value or selecting items for an operation that is only applicable to a subset of objects.
+
+In the below example we group interfaces based on the vlan they're assigned to:

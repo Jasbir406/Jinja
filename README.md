@@ -3,8 +3,15 @@
 How to push from local folder to git.
 
 git add .
+
+
 git commit -m "First commit". Put a descriptive message.
-~/Documents/Jinja main ⇡1 ❯ git push -u origin main                                                                                                                        х HUP 04:33:20 PM
+
+
+git push
+
+Example:
+~/Documents/Jinja main ⇡1 ❯ git push
 Enumerating objects: 4, done.
 Counting objects: 100% (4/4), done.
 Delta compression using up to 10 threads
